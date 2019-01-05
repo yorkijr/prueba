@@ -1,0 +1,492 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A3808430-16AB-4CFD-9BFB-4BF7BE2CEB56}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>servicio_emision</RootNamespace>
+    <AssemblyName>servicio-emision</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wsEmisionFacialSabre.asmx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Data\clsLog.cs" />
+    <Compile Include="App_Data\clsSabre.cs" />
+    <Compile Include="App_Data\clsWSSabre.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="wsEmisionFacialSabre.asmx.cs">
+      <DependentUpon>wsEmisionFacialSabre.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Web References\GetReservationOperation\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSabreCommand\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSabreReadPNR\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSabreReadPNR_RQ\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSabreSessionClose\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wsSabreSessionCreate\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\GetReservationOperation\Air.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\Ancillaries.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\GetReservationOperation\GetReservationRS.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\GetReservationOperation\GetReservationSTLRQ_v1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\GetReservationSTLRS_v1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\GetReservationWSDL.wsdl" />
+    <None Include="Web References\GetReservationOperation\msg-header-2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\OpenReservation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\PNRBuilderTypes_v1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\Pricing.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\GetReservationOperation\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\GetReservationOperation\wsse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\xlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\GetReservationOperation\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreCommand\envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreCommand\msg-header-2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreCommand\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\wsSabreCommand\SabreCommandLLS1.wsdl" />
+    <None Include="Web References\wsSabreCommand\SabreCommandLLS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreCommand\SabreCommandLLS10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreCommand\SabreCommandLLS11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreCommand\SabreCommandLLSRS.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\wsSabreCommand\wsse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreCommand\xlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreCommand\xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreCommand\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR\envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR\msg-header-2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreReadPNR\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\wsSabreReadPNR\TravelItineraryReadLLSRQ.wsdl" />
+    <None Include="Web References\wsSabreReadPNR\TravelItineraryReadLLSRQ.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR\TravelItineraryReadLLSRQRS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR\TravelItineraryReadLLSRS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreReadPNR\TravelItineraryReadRS.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\wsSabreReadPNR\wsse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR\xlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR\xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\msg-header-2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\OpenReservation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreReadPNR_RQ\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\wsSabreReadPNR_RQ\STL_For_SabreProtocol_v.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\STL_Header_v.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\TravelItineraryReadRQ3.wsdl" />
+    <None Include="Web References\wsSabreReadPNR_RQ\TravelItineraryReadRQ3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\TravelItineraryReadRQRS3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreReadPNR_RQ\TravelItineraryReadRS.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\wsSabreReadPNR_RQ\TravelItineraryReadRS3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\wsse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\xlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreReadPNR_RQ\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionClose\envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionClose\msg-header-2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreSessionClose\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\wsSabreSessionClose\SessionCloseRQ.wsdl" />
+    <None Include="Web References\wsSabreSessionClose\SessionCloseRQ.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionClose\SessionCloseRQRS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreSessionClose\SessionCloseRS.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\wsSabreSessionClose\SessionCloseRS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionClose\wsse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionClose\xlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionClose\xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionClose\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionCreate\envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionCreate\msg-header-2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreSessionCreate\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\wsSabreSessionCreate\SessionCreateRQ.wsdl" />
+    <None Include="Web References\wsSabreSessionCreate\SessionCreateRQ.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionCreate\SessionCreateRQRS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\wsSabreSessionCreate\SessionCreateRS.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\wsSabreSessionCreate\SessionCreateRS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionCreate\wsse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionCreate\xlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionCreate\xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\wsSabreSessionCreate\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmisionVOL.Entidades\EmisionVOL.Entidades.csproj">
+      <Project>{db26d5c2-feb4-4a0b-82fa-c536a1aa3f42}</Project>
+      <Name>EmisionVOL.Entidades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/GetReservation_1.18.0.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\GetReservationOperation\</RelPath>
+      <UpdateFromURL>http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/GetReservation_1.18.0.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>servicio_emision_GetReservationOperation_GetReservationService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/TravelItineraryReadRQ3.6.0.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSabreReadPNR_RQ\</RelPath>
+      <UpdateFromURL>http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/TravelItineraryReadRQ3.6.0.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>servicio_emision_wsSabreReadPNR_RQ_TravelItineraryReadService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/SabreCommandLLS1.6.1RQ.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSabreCommand\</RelPath>
+      <UpdateFromURL>http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/SabreCommandLLS1.6.1RQ.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>servicio_emision_wsSabreCommand_SabreCommandLLSService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/TravelItineraryReadLLSRQ.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSabreReadPNR\</RelPath>
+      <UpdateFromURL>http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/TravelItineraryReadLLSRQ.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>servicio_emision_wsSabreReadPNR_TravelItineraryReadService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://webservices.sabre.com/wsdl/sabreXML1.0.00/usg/SessionCloseRQ.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSabreSessionClose\</RelPath>
+      <UpdateFromURL>http://webservices.sabre.com/wsdl/sabreXML1.0.00/usg/SessionCloseRQ.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>servicio_emision_wsSabreSessionClose_SessionCloseRQService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://webservices.sabre.com/wsdl/sabreXML1.0.00/usg/SessionCreateRQ.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsSabreSessionCreate\</RelPath>
+      <UpdateFromURL>http://webservices.sabre.com/wsdl/sabreXML1.0.00/usg/SessionCreateRQ.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>servicio_emision_wsSabreSessionCreate_SessionCreateRQService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Start\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61342</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61342/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

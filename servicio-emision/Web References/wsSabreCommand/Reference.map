@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/SabreCommandLLS1.6.1RQ.wsdl" filename="SabreCommandLLS1.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/xlink.xsd" filename="xlink.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/wsse.xsd" filename="wsse.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/xml.xsd" filename="xml.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/xmldsig-core-schema.xsd" filename="xmldsig-core-schema.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/SabreCommandLLS1.6.1RQRS.xsd" filename="SabreCommandLLS1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/msg-header-2_0.xsd" filename="msg-header-2_0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/envelope.xsd" filename="envelope.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/SabreCommandLLS1.6.1RS.xsd" filename="SabreCommandLLS10.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/SabreCommandLLS1.6.1RQ.xsd" filename="SabreCommandLLS11.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

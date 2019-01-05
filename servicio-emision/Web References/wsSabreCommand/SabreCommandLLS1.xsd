@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:tns="http://webservices.sabre.com/sabreXML/2003/07" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://webservices.sabre.com/sabreXML/2003/07" xmlns="http://www.w3.org/2001/XMLSchema">
+  <include schemaLocation="SabreCommandLLS1.6.1RQ.xsd" />
+  <include schemaLocation="SabreCommandLLS1.6.1RS.xsd" />
+</schema>

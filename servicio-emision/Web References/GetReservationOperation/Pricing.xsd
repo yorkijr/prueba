@@ -1,0 +1,1279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns="http://services.sabre.com/res/or/v1_12" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://services.sabre.com/res/or/v1_12" version="0.0.0" jaxb:version="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="PricingProviderType">
+    <xsd:sequence>
+      <xsd:element name="ProviderName" type="xsd:string" />
+      <xsd:element minOccurs="0" name="PricingOptions" type="PricingRequestInformationType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PricingRequestInformationType">
+    <xsd:choice>
+      <xsd:element minOccurs="0" name="AirPriceQualifiers" type="AirPriceQualifiersType" />
+      <xsd:element minOccurs="0" name="HotelRateQualifiers" type="HotelRateQualifiersType" />
+      <xsd:element minOccurs="0" name="CarRateQualifiers" type="CarRateQualifiersType" />
+    </xsd:choice>
+  </xsd:complexType>
+  <xsd:simpleType name="PromotionEnumtype">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="C" />
+      <xsd:enumeration value="L" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="AirPriceQualifiersType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Specifies passenger numbers and types.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="4" name="SeatsRequested" type="xsd:nonNegativeInteger">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The sum of all seats required by all passenger groups.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="4" name="AirTravelerAvail" type="TravelerInformationType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Specifies passenger numbers and types.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="PriceRequestOptions" type="PriceRequestOptionsType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Identify pricing source, if negotiated fares are requested and if it
+                        is a reprice request.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TravelerRating" type="TravelerRatingType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Customer Value Scores and Frequent Flyer Tiers for one traveler. It
+                        can influence Availability results when provided.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="GoverningCarrierOverride" type="GoverningCarrierOverrideType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Airline Carrier Code - override the GOVERNING CARRIER to get the fare filed by that carrier.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="VoluntaryChanges" type="VoluntaryChangesSMPType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Identifies whether penalties associated with voluntary changes should be included in the search results.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="RetailerRules" type="RetailerRulesType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">TBD.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TaxRules" type="TaxRulesType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Contains tax depending rules.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ValidatingCarrier" type="ValidatingCarrierType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Validating carrier rule.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CabinPref" type="CabinPrefType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Defines preferred cabin to be used in a search for this leg level (if SegmentType is "O") or segment (if SegmentType is "X"). The cabin type specified in this element will override the cabin type specified at the request level for this leg/segment. If a cabin type is not specified for this element the cabin type at request level will be used as default for this leg or segment. If the cabin type is not specified at both the leg/segment level and request level a default cabin of "Economy" will be used?</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="specificPTC_Indicator" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">If true, this request is for a specific PTC and only fares applicable to
+                    that PTC will be checked and returned. It is the same as XOFares flag in Intellisell request.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="tripType" type="AirTripType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Specify air trip type.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="xOFares" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation>XOFares indicator</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="CarRateQualifiersType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Corporate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="50" name="ID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CustLoyalty">
+        <xsd:complexType>
+          <xsd:attribute name="programID" type="xsd:string" use="required" />
+          <xsd:attribute name="membershipId" type="xsd:string" use="required" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="GuaranteePrepaid">
+        <xsd:complexType>
+          <xsd:attribute name="returnGuaranteedRates" type="xsd:boolean" />
+          <xsd:attribute name="returnPrepaidRates" type="xsd:boolean" />
+          <xsd:attribute name="returnRegularRates" type="xsd:boolean" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ID">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="50" name="Number" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="Promotion">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="50" name="Code" type="xsd:string" />
+          </xsd:sequence>
+          <xsd:attribute name="type" type="PromotionEnumtype" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="50" name="RateCode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="TourCode">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Text" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="VehiclePreferences">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Preference">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element maxOccurs="10" name="VehicleType" type="xsd:string" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="LocationPreferences">
+        <xsd:complexType>
+          <xsd:attribute name="locationCode" type="xsd:string" use="required" />
+          <xsd:attribute name="cityLocation" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="E" />
+                <xsd:enumeration value="N" />
+                <xsd:enumeration value="S" />
+                <xsd:enumeration value="W" />
+                <xsd:enumeration value="C" />
+                <xsd:enumeration value="R" />
+                <xsd:enumeration value="A" />
+                <xsd:enumeration value="I" />
+                <xsd:enumeration value="O" />
+                <xsd:enumeration value="P" />
+                <xsd:enumeration value="X" />
+                <xsd:enumeration value="H" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="VendorPreferences">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="20" name="VendorPreference">
+              <xsd:complexType>
+                <xsd:attribute name="code" type="xsd:string" use="required" />
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+          <xsd:attribute name="exclude" type="xsd:boolean" use="optional" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="SpecialEquipmentPreferences">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="10" name="Preference">
+              <xsd:complexType>
+                <xsd:attribute name="equipType" type="xsd:string" use="required" />
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="ccRate" type="xsd:string" />
+    <xsd:attribute name="commission" type="xsd:boolean" />
+    <xsd:attribute name="currencyCode" type="xsd:string" />
+    <xsd:attribute name="mileagePlan" type="xsd:string" />
+    <xsd:attribute name="rateAssured" type="xsd:boolean" />
+    <xsd:attribute name="rateCategory" type="xsd:string" />
+    <xsd:attribute name="ratePlan" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="HotelRateQualifiersType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="99" name="RateAccessCode">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="code" type="xsd:string" use="required" />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="8" name="ContractNegotiatedRateCode" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="3" name="RatePlanCode">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="code" type="xsd:string" use="required" />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ValidatingCarrierType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="Preference">
+        <xsd:complexType>
+          <xsd:attribute name="code" type="CarrierCode" use="required" />
+          <xsd:attribute name="level" type="ValidatingCarrierPreferLevelType" use="required" />
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="code" type="CarrierCode">
+      <xsd:annotation>
+        <xsd:documentation>Validating Carrier code</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="TaxRulesType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Combines exemption rules connected with taxes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ExemptAllTaxes" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Exempt all taxes (/TE)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ExemptAllTaxesAndFees" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Exempt all taxes and fees (/TN)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="ExemptTax" type="TaxCodeType">
+        <xsd:annotation>
+          <xsd:documentation>Exempt Tax (/TE)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RetailerRulesType">
+    <xsd:sequence>
+      <xsd:element minOccurs="1" maxOccurs="4" name="RetailerRule">
+        <xsd:complexType>
+          <xsd:attribute name="code" use="required">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="[0-9a-zA-Z]{2,20}" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute default="false" name="force" type="xsd:boolean" use="optional">
+      <xsd:annotation>
+        <xsd:documentation>If set to true, only fares with a matched Business Rule containing the specified Retailer Rule Qualifier will be returned</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="VoluntaryChangesSMPType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Specifies charges and/or penalties associated with making ticket changes after purchase.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs="0">
+      <xsd:element minOccurs="0" maxOccurs="2" name="Penalty">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Specifies penalty charges as either a currency amount or a percentage of the fare.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:attribute name="type" use="optional">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Indicates the type (Refund or Exchange) of penalty involved in the search or response.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="Refund" />
+                <xsd:enumeration value="Exchange" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="exclude" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Indicate that specific penalty type should be excluded from the response.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:attribute>
+          <xsd:attribute name="application" use="optional">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifier used to indicate whether the change occurs before or after departure from the origin city.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="After" />
+                <xsd:enumeration value="Before" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attributeGroup ref="CurrencyAmountGroup">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The penalty charge defined a fee in terms of its amount, currency and decimal laces.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:attributeGroup>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="match" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Indicates relation between conditions. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="All">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Conditions are joined by logical conjunction - fare needs to fulfill all the conditions to be returned in response. </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Any">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Conditions are joined by logical disjunction - fare needs to fulfill at least one of the conditions to be returned in response.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Info">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Return penalty information</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="GoverningCarrierOverrideType">
+    <xsd:attribute name="airlineCode" type="CarrierCode" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Airline Carrier Code - override the GOVERNING CARRIER to get the fare filed by that carrier.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="TravelerRatingType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Customer Value Scores and Frequent Flyer Tiers for one traveler. It
+                can influence Availability results when provided.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" maxOccurs="unbounded" name="Score" type="ScoreType" />
+        <xsd:element minOccurs="0" maxOccurs="unbounded" name="FrequentFlyer" type="FrequentFlyerType" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ScoreType">
+    <xsd:attribute name="value" type="xsd:integer" use="required" />
+    <xsd:attribute name="carrier" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="FrequentFlyerType">
+    <xsd:attribute name="tier" type="xsd:integer" use="required" />
+    <xsd:attribute name="carrier" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="NegotiatedFareCodeType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="Supplier" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">This element indicates the supplier associated with
+                        a negotiated fare code.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attributeGroup ref="CodeListAirGroup" />
+  </xsd:complexType>
+  <xsd:complexType name="AccountCodeType">
+    <xsd:attribute name="code" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="IndDefaultFalseType">
+    <xsd:attribute default="false" name="ind" type="xsd:boolean" />
+  </xsd:complexType>
+  <xsd:complexType name="IndType">
+    <xsd:attribute name="ind" type="xsd:boolean" />
+  </xsd:complexType>
+  <xsd:complexType name="IndRequiredType">
+    <xsd:attribute name="ind" type="xsd:boolean" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="PriorityType">
+    <xsd:attribute name="priority" type="xsd:int" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="PriorityLegType">
+    <xsd:attribute name="priority" type="xsd:int" use="required" />
+    <xsd:attribute name="leg" type="xsd:positiveInteger">
+      <xsd:annotation>
+        <xsd:documentation>Which leg is most significant one? If inconclusive continue
+                    comparisons segment by segment starting from the beginning of itinerary
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="CarrierType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PriorityLegType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="Carrier">
+            <xsd:annotation>
+              <xsd:documentation>Specifies desired order of carriers</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:attribute name="code" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PriorityComplexType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="1" name="Price" type="PriorityType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer cheaper itineraries</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="DirectFlights" type="PriorityLegType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer itineraries will less connections</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="Time" type="PriorityType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer itineraries departing closer to requested departure time
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="Vendor" type="PriorityType">
+        <xsd:annotation>
+          <xsd:documentation>Promote certain marketing carriers over all the others in returning
+                        results. (configured in rules).
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="MarketingCarrier" type="CarrierType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer itineraries with marketing carriers in order speciied in
+                        Carrier subtags, comparing segment-wise
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="OperatingCarrier" type="CarrierType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer itineraries with operating carriers in order speciied in
+                        Carrier subtags, comparing segment-wise
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="ElapsedTime" type="PriorityType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer itineraries with shorter travel times</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="DepartureTime" type="PriorityLegType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer itineraries departing earlier during the day</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="1" name="ConnectionTime" type="PriorityLegType">
+        <xsd:annotation>
+          <xsd:documentation>Prefer itineraries with smaller amount of time waiting in the airports
+                        during connections
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IndicatorsType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="RetainFare" type="IndRequiredType">
+        <xsd:annotation>
+          <xsd:documentation>Currently must be set to true.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="MinMaxStay" type="IndRequiredType">
+        <xsd:annotation>
+          <xsd:documentation>If set to true, fares that have a min/max stay can be included in the
+                        responses. If set to false, then no fares that include a min/max stay requirement
+                        will be included in the response.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="RefundPenalty" type="IndRequiredType">
+        <xsd:annotation>
+          <xsd:documentation>If set to true, fares that have a refund penalty can be included in
+                        the responses. If set to false, then no fares that include a refund penalty
+                        requirement will be included in the response.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ResTicketing" type="IndRequiredType">
+        <xsd:annotation>
+          <xsd:documentation>If set to true, fares that have a reservation/ticketing can be
+                        included in the responses. If set to false, then no fares that include
+                        reservation/ticketing requirement will be included in the response.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TravelPolicy" type="IndRequiredType">
+        <xsd:annotation>
+          <xsd:documentation>This element is currently ignored whether it is true or false.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="CustomerComplexType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="REGULAR">
+        <xsd:annotation>
+          <xsd:documentation>Regular customer type.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TVLYPREF">
+        <xsd:annotation>
+          <xsd:documentation>TVLY_PREFERRED customer type.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="PREFELITE">
+        <xsd:annotation>
+          <xsd:documentation>PREFERED_ELITE customer type.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LOYALTY">
+        <xsd:annotation>
+          <xsd:documentation>LOYALTY customer type.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ItinerariesPerGroupType">
+    <xsd:attribute name="itinerariesPerGroup" type="xsd:int">
+      <xsd:annotation>
+        <xsd:documentation>Indicates desired number of itineraries to be returned in each passenger
+                    group at beggining of response.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="BrandedFareIndicatorsType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ReturnCheapestUnbrandedFare" type="IndRequiredType" />
+    </xsd:sequence>
+    <xsd:attribute name="singleBrandedFare" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Return single brand option per itin</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="multipleBrandedFares" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Return multiple brand options per itin</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="returnBrandAncillaries" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Return ancillaries from the ATPCO Branded Fares Feature
+                    Table 166
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:simpleType name="PassengerStatusEnumType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="R">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Residency.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="E">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Employment.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="N">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Nationality.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="PassengerStatusType">
+    <xsd:choice>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="StateCode" type="xsd:string" />
+        <xsd:element name="CountryCode" type="xsd:string" />
+      </xsd:sequence>
+      <xsd:element name="CityCode" type="AlphaLength3" />
+    </xsd:choice>
+    <xsd:attribute name="type" type="PassengerStatusEnumType" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="ETicketableOverrideType">
+    <xsd:attribute name="value" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">ETicketable override</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="CurrencyType">
+    <xsd:attribute name="dual" type="AlphaLength3">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Dual currency</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="mOverride" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">M override</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="OBFeesType">
+    <xsd:attribute name="rType" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation>Indicator Returning R-Type OB Fees</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="tType" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation>Indicator Returning T-Type OB Fees</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="FareAdjustmentType">
+    <xsd:attribute name="value" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Adjustment Value, can be positive or negative, number or percentage
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="currency" type="AlphaLength3">
+      <xsd:annotation>
+        <xsd:documentation>Currency of Adjustment's Value</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="ValueType">
+    <xsd:attribute name="value" type="xsd:decimal" />
+  </xsd:complexType>
+  <xsd:complexType name="PriceRequestOptionsType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Identify pricing source, if negotiated fares are requested and if it is a
+                reprice request.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NegotiatedFareCode" type="NegotiatedFareCodeType" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="AccountCode" type="AccountCodeType" />
+      <xsd:element minOccurs="0" name="PublicFare" type="IndDefaultFalseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">This element finds only public fares.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="PrivateFare" type="IndDefaultFalseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">This element finds only private fares.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="IATAFare" type="IndDefaultFalseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">This element finds only IATA fares.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="WebFare" type="IndType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Web fare</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="Priority" type="PriorityComplexType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">This element governs how flights are returned. A user can uses a
+                        priority of 1-9 to make this determination.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="Indicators" type="IndicatorsType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">This element restricts fares which can be returned in response. If a
+                        customer passes this element, all its children should be specified.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="PromoID" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Promotional Identifier - a string which identifies a promotion, possibly giving a
+                        discount prices etc.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CustomerType" type="CustomerComplexType" />
+      <xsd:element minOccurs="0" name="MultipleTravelerGroups" type="ItinerariesPerGroupType">
+        <xsd:annotation>
+          <xsd:documentation>This element governs how flights are returned when multiple passenger groups are
+                        requested.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="BrandedFareIndicators" type="BrandedFareIndicatorsType" />
+      <xsd:element minOccurs="0" name="PassengerStatus" type="PassengerStatusType" />
+      <xsd:element minOccurs="0" name="PointOfSaleOverride" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Will return the fares available for specified point of sale and
+                        priced in this point of sale currency. Currency is overriden by
+                        PriceRequestInformation@CurrencyCode.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="PointOfTicketingOverride" type="xsd:string" />
+      <xsd:element minOccurs="0" name="ApplyResidentDiscount" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Apply resident discount in CLFE</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ETicketableOverride" type="ETicketableOverrideType" />
+      <xsd:element minOccurs="0" name="Currency" type="CurrencyType" />
+      <xsd:element minOccurs="0" name="UseReducedConstructions" type="IndType">
+        <xsd:annotation>
+          <xsd:documentation>Use reduced constructions (simple fare paths with restrictions on the number of
+                        fare components).
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="OBFees" type="OBFeesType" />
+      <xsd:element minOccurs="0" name="FareBreaksAtLegs" type="IndType">
+        <xsd:annotation>
+          <xsd:documentation>Force fare breaks at leg points if split taxes by leg requested. By default set to
+                        true.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" maxOccurs="4" name="FareAdjustment" type="FareAdjustmentType">
+        <xsd:annotation>
+          <xsd:documentation>Capability to specify Plus-Up and Discount Amount and Percentage.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ForceCompanion" type="ValueType">
+        <xsd:annotation>
+          <xsd:documentation>Force companion fare value.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="UsePassengerFares" type="IndRequiredType">
+        <xsd:annotation>
+          <xsd:documentation>At least one fare component for each passenger type must be applicable for that
+                        passenger type.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="UseNegotiatedFares" type="IndRequiredType">
+        <xsd:annotation>
+          <xsd:documentation>Returned fares need to match AcccountCode/CorporateID on at least one fare
+                        component.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attributeGroup ref="PriceRequestAttributes" />
+  </xsd:complexType>
+  <xsd:attributeGroup name="PriceRequestAttributes">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Attribute collection used to describe a price request.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="fareQualifier">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Fare Type is specific to a specific fare and this is a request for a set
+                    of fares based on these qualifiers.
+                </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:union memberTypes="xsd:string xsd:boolean" />
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="negotiatedFaresOnly" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">If set to true then returned fares need to match requested
+                    AcccountCode/CorpID on all fare components
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="currencyCode" type="AlphaLength3">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Type of funds preferred for reviewing monetary values, in ISO 4217
+                    codes.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="pricingSource" type="RequestPricingSourceType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">It can be used to indicate whether the fare is public or private.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="reprice" type="xsd:boolean" />
+    <xsd:attribute name="processThruFaresOnly" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Activates processing of thru fares only.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="purchaseDate" type="xsd:date">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Specify purchase date. Fares returned will be based on the purchase
+                    date.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="purchaseTime" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Specify purchase time. Fares returned will be based on the purchase
+                    time.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="netFaresUsed" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Set to true when exchange ticket uses net fare.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:simpleType name="RequestPricingSourceType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">It can be used to indicate whether the fare is public or private.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Published" />
+      <xsd:enumeration value="Private" />
+      <xsd:enumeration value="Both" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:attributeGroup name="CodeListAirGroup">
+    <xsd:attributeGroup ref="CodeListGroup" />
+    <xsd:attribute name="secondaryCode" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">An additional attribute to allow flexibility for particular
+                    organizations who require an additional code.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="supplierCode" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">An additional attribute to allow flexibility for particular
+                    organizations who require an additional supplier code.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:attributeGroup name="CodeListGroup">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used to specify a code and its associated attributes; meaning is derived
+                from actual use.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="code" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Any code used to specify an item, for example, type of traveler, service
+                    code, room amenity, etc.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="codeContext" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Identifies the source authority for the code.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="URI" type="xsd:anyURI">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Identifies the location of the code table</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="quantity" type="xsd:int">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Specifies the number of items that are identified by the Code (e.g., 2
+                    adults, 5 first class seats).
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:complexType name="TravelerInformationType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Specifies passenger numbers and types.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element maxOccurs="9" name="PassengerTypeQuantity" type="PassengerTypeQuantityType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Specifies number of passengers using Passenger Type Codes.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="AirTraveler" type="AirTravelerType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Information profiling the person traveling Gender - the gender of
+                        the customer, if needed BirthDate - Date of Birth Currency - the preferred currency in which
+                        monetary amounts should be returned.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AirTravelerType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Information about the person traveling. Gender - the gender of the customer,
+                if needed. BirthDate - Date of Birth. Currency - the preferred currency in which monetary amounts should
+                be returned.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="5" name="CustLoyalty" type="CustLoyaltyType">
+        <xsd:annotation>
+          <xsd:documentation>Specify a customer loyalty program.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="PassengerTypeQuantity" type="PassengerTypeQuantityType">
+        <xsd:annotation>
+          <xsd:documentation>Define information on the number of passengers of a specific type.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="TravelerRefNumber" type="TravelerRefNumberType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Direct reference of traveler assigned by requesting system. Used as
+                        a cross reference between data segments.
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FlightSegmentRPHs" type="FlightSegmentRPHsType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Reference pointers to flight segments</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="currencyCode" type="AlphaLength3">
+      <xsd:annotation>
+        <xsd:documentation>The preferred currency in which monetary amounts should be returned.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="passengerTypeCode" type="AlphaLength3" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A three-letter code representing passenger type (e.g. .ADT. for adult, .CNN. for
+                    child)
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="accompaniedByInfant" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Indicates if an infant accompanying a traveler is with or without a
+                    seat.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="FlightSegmentRPHsType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="99" name="FlightSegmentRPH" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Reference to the flight segments for this traveler
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TravelerRefNumberType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A reference place holder used as a pointer to link back to the traveler.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="RPH" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Reference place holder.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="CustLoyaltyType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Program rewarding frequent use by accumulating credits for services provided
+                by vendors.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="programID" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Identifier to indicate the company owner of the loyalty program.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="membershipID" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Unique identifier of the member in the program (membership number,
+                    account number, etc.).
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="travelSector" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Identifies the travel sector. Refer to OTA Code List Travel Sector
+                    (TVS).
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="loyalLevel" type="xsd:string" />
+    <xsd:attribute name="singleVendorInd" type="SingleVendorIndType" />
+    <xsd:attribute name="signupDate" type="xsd:date" />
+    <xsd:attribute name="RPH" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Reference place holder, to reference it back in the response.
+                </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:simpleType name="SingleVendorIndType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Indicates if program is affiliated with a group of related offers
+                accumulating credits.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="SingleVndr" />
+      <xsd:enumeration value="Alliance" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="PassengerTypeQuantityType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Specifies a PTC (Passenger Type Code) and the associated number of PTC's -
+                for use in specifying passenger lists.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="TravelerCountType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="BirthDate" type="BirthDateType" />
+          <xsd:element minOccurs="0" name="Age" type="AgeType">
+            <xsd:annotation>
+              <xsd:documentation>Exchange-specific</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="State" type="StateType">
+            <xsd:annotation>
+              <xsd:documentation>Exchange-specific</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="TotalNumber" type="TotalNumberType">
+            <xsd:annotation>
+              <xsd:documentation>Exchange-specific</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute default="true" name="changeable" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en" />
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="index" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Allows to identify which one of requested passengers this solution relates
+                            to.
+                        </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="requestedPassengerIndex" type="xsd:nonNegativeInteger">
+          <xsd:annotation>
+            <xsd:documentation>Allows to identify which one of requested passenger groups from Exchange
+                            request this solution relates to.
+                        </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="BirthDateType">
+    <xsd:attribute name="date" type="xsd:date" />
+  </xsd:complexType>
+  <xsd:complexType name="AgeType">
+    <xsd:attribute name="years" type="xsd:short" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="StateType">
+    <xsd:attribute name="code" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="TotalNumberType">
+    <xsd:attribute name="value" type="xsd:short" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="AlphaLength3">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used for Alphabetic Strings, length exactly 3</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[a-zA-Z]{3}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="TravelerCountType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Defines the number of travelers of a specific type (e.g. a driver type can
+                be either one of: Adult, YoungDriver, YoungerDriver, or it may be a code that is acceptable to both
+                Trading Partners).
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="code">
+      <xsd:annotation>
+        <xsd:documentation>Specify traveler type code.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:union memberTypes="xsd:string" />
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="codeContext" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Identifies the source authority for the code.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="URI" type="xsd:anyURI">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Identifies the location of the code table</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="quantity" type="xsd:int">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Specifies the number of travelers.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="DecimalPrice">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Provides a monetary amount and the currency code to reflect the currency in which this amount is expressed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="currencyCode" type="CurrencyCodeType" use="required" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TaxCodeType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Defines the data fields available for tax code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="taxCode" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Identifies the code for the tax.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="CabinPrefType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Indicates preferences for choice of airline cabin for a given travel situation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute default="Preferred" name="preferLevel" type="PreferLevelType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Used to indicate a level of preference for an associate item, only, unacceptable, preferred.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="cabin" type="CabinNameType">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Specify cabin type.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:simpleType name="CabinNameType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A cabin is either Premium First (P), First (F), Premium Business (J), Business (C), Premium Economy (S) or Economy (Y)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="PremiumFirst" />
+      <xsd:enumeration value="First" />
+      <xsd:enumeration value="PremiumBusiness" />
+      <xsd:enumeration value="Business" />
+      <xsd:enumeration value="PremiumEconomy" />
+      <xsd:enumeration value="Economy" />
+      <xsd:enumeration value="Y" />
+      <xsd:enumeration value="S" />
+      <xsd:enumeration value="C" />
+      <xsd:enumeration value="J" />
+      <xsd:enumeration value="F" />
+      <xsd:enumeration value="P" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PreferLevelType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used to specify a preference level for something that is or will be requested (e.g. a supplier of a service, a type of service, a form of payment, etc.).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="Only" />
+      <xsd:enumeration value="Unacceptable" />
+      <xsd:enumeration value="Preferred" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Money">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used for amounts, max 3 decimals</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:decimal">
+      <xsd:fractionDigits value="3" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:attributeGroup name="CurrencyCodeGroup">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Provides a currency code to reflect the currency in which an amount may be expressed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="currencyCode" type="CurrencyCodeType" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">A currency code (e.g. USD, EUR, PLN)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="decimalPlaces" type="xsd:nonNegativeInteger" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">Indicates the number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit".</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:attributeGroup name="CurrencyAmountGroup">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Provides a monetary amount and the currency code to reflect the currency in which this amount is expressed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="amount" type="Money" use="optional" />
+    <xsd:attributeGroup ref="CurrencyCodeGroup" />
+  </xsd:attributeGroup>
+  <xsd:simpleType name="CurrencyCodeType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used for Currency Codes</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="AlphaLength3" />
+  </xsd:simpleType>
+  <xsd:simpleType name="CarrierCode">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9A-Z]{2,3}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="AirTripType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Identifies the trip type - one way, return, circle trip, open jaw.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="OneWay" />
+      <xsd:enumeration value="Return" />
+      <xsd:enumeration value="Circle" />
+      <xsd:enumeration value="OpenJaw" />
+      <xsd:enumeration value="Other" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ValidatingCarrierPreferLevelType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used to specify a preference level for ValidatingCarrier. For adding new enums see PreferLevelType.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="Unacceptable" />
+      <xsd:enumeration value="Preferred" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

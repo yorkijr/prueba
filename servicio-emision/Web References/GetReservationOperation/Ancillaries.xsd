@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns="http://services.sabre.com/res/or/v1_12" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://services.sabre.com/res/or/v1_12" version="0.0.0" jaxb:version="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AncillaryServiceData">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:group minOccurs="0" ref="AncillaryServicesDataGroup" />
+      </xsd:sequence>
+      <xsd:attributeGroup ref="AncillaryServicesAttributes" />
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="NameAssociationList">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NameAssociationTag" type="NameAssociationTag" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NameAssociationTag">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="LastName" type="CommonString" />
+      <xsd:element minOccurs="0" name="FirstName" type="CommonString" />
+      <xsd:element minOccurs="0" name="Prefix" type="CommonString" />
+      <xsd:choice>
+        <xsd:element minOccurs="0" name="NameRefNumber" type="CommonString" />
+        <xsd:element minOccurs="0" name="Id" type="UniqueIdentifier" />
+        <xsd:element minOccurs="0" name="ReferenceId" type="xsd:int" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SegmentAssociationList">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="SegmentAssociationTag" type="SegmentAssociationTag" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="SegmentAssociationId" type="xsd:int" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SegmentAssociationTag">
+    <xsd:sequence>
+      <xsd:element name="CarrierCode" type="AirlineCode" />
+      <xsd:element name="FlightNumber" type="FlightNumber" />
+      <xsd:element name="DepartureDate" type="xsd:date" />
+      <xsd:element name="BoardPoint" type="CityCode" />
+      <xsd:element name="OffPoint" type="CityCode" />
+      <xsd:element name="ClassOfService" type="CommonString" />
+      <xsd:element name="BookingStatus" type="CommonString" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AncillaryPriceQuoteData">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="PriceQuoteId" type="xsd:string" />
+      <xsd:element minOccurs="0" name="ProductFeeNumber" type="xsd:string" />
+      <xsd:element minOccurs="0" name="ExpirationDate" type="xsd:date" />
+      <xsd:element minOccurs="0" name="LrecAssociation" type="xsd:int" />
+    </xsd:sequence>
+    <xsd:attribute name="PriceQuoteIdCompressed" type="xsd:boolean" />
+  </xsd:complexType>
+  <xsd:complexType name="SegmentOrTravelPortion">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AirlineCode" type="CommonString" />
+      <xsd:element minOccurs="0" name="FlightNumber" type="CommonString" />
+      <xsd:element minOccurs="0" name="OperatingFlightNumber" type="CommonString">
+        <xsd:annotation>
+          <xsd:documentation>Operating flight number</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ClassOfService" type="CommonString" />
+      <xsd:element minOccurs="0" name="DepartureDate" type="xsd:date" />
+      <xsd:element minOccurs="0" name="BoardPoint" type="xsd:string" />
+      <xsd:element minOccurs="0" name="OffPoint" type="xsd:string" />
+      <xsd:element minOccurs="0" name="EquipmentType" type="CommonString" />
+      <xsd:element minOccurs="0" name="ETicketNumber" type="CommonString" />
+      <xsd:element minOccurs="0" name="ETicketCoupon" type="CommonString" />
+      <xsd:element minOccurs="0" name="EMDNumber" type="CommonString" />
+      <xsd:element minOccurs="0" name="EMDCoupon" type="CommonString" />
+      <xsd:element minOccurs="0" name="MarketingCarrier" type="CommonString" />
+      <xsd:element minOccurs="0" name="OperatingCarrier" type="CommonString" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="UniqueIdentifier" use="optional" />
+    <xsd:attribute name="sequence" type="Numeric0to99999" use="optional" />
+    <xsd:attribute name="advisory" type="xsd:boolean" use="optional" />
+  </xsd:complexType>
+  <xsd:complexType name="AncillaryServiceETicketNumberUpdate">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ETicketNumber" type="CommonString" />
+      <xsd:element minOccurs="0" name="ETicketCoupon" type="CommonString" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AncillaryPrice">
+    <xsd:sequence>
+      <xsd:element name="Price" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="Currency" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AncillaryTax">
+    <xsd:sequence>
+      <xsd:element name="TaxAmount" type="xsd:decimal" />
+      <xsd:element name="TaxCode" type="CommonString" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:group name="AncillaryServicesDataGroup">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="NameAssociationList" type="NameAssociationList" />
+      <xsd:element minOccurs="0" name="SegmentAssociationList" type="SegmentAssociationList" />
+      <xsd:group ref="BasicAncillaryServicesDataGroup" />
+      <xsd:group ref="OptionalAncillaryServicesInformationDataGroup" />
+      <xsd:element minOccurs="0" name="StatusIndicator" type="xsd:integer" />
+      <xsd:element minOccurs="0" name="NumberOfItems" type="CommonString" />
+      <xsd:element minOccurs="0" name="ActionCode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="SegmentIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="FrequentFlyerTier" type="CommonString" />
+      <xsd:element minOccurs="0" name="RefundFormIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="FareGuaranteedIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="ServiceChargeIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="AdvancePurchaseIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="BookingSource" type="CommonString" />
+      <xsd:element minOccurs="0" name="TaxIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="TicketingIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="FeeWaiveReason" type="CommonString" />
+      <xsd:element minOccurs="0" name="FulfillmentType" type="CommonString" />
+      <xsd:element minOccurs="0" name="AaPayOriginalSeat" type="CommonString" />
+      <xsd:element minOccurs="0" name="PdcSeat" type="CommonString" />
+      <xsd:element minOccurs="0" name="EquipmentType" type="CommonString" />
+      <xsd:element minOccurs="0" name="AaPayOptionalStatus" type="xsd:string" />
+      <xsd:element minOccurs="0" name="FirstTravelDate" type="xsd:string" />
+      <xsd:element minOccurs="0" name="LastTravelDate" type="xsd:string" />
+      <xsd:element minOccurs="0" name="TTYConfirmationTimestamp" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="PurchaseTimestamp" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="BrandedFareId" type="CommonString" />
+      <xsd:element name="GroupCode" type="CommonString" />
+      <xsd:element minOccurs="0" name="TourCode" type="CommonString" />
+      <xsd:element minOccurs="0" name="EmdPaperIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="SeatRequestTransactionID" type="xsd:string" />
+      <xsd:element minOccurs="0" name="TicketUsedForEMDPricing" type="CommonString" />
+      <xsd:element minOccurs="0" name="PaperDocRequired" type="OptionalIndicator" />
+      <xsd:element minOccurs="0" name="EMDConsummedAtIssuance" type="OptionalIndicator" />
+      <xsd:element minOccurs="0" name="TaxExemption" type="Indicator" />
+      <xsd:element minOccurs="0" name="PriceQuoteDesignator" type="xsd:integer" />
+      <xsd:element minOccurs="0" name="PriceMismatchAction" type="PriceMismatchAction" />
+      <xsd:element minOccurs="0" name="InventoryControlledIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="InventoryConfirmationToken" type="CommonString" />
+      <xsd:element minOccurs="0" name="ACSCount" type="xsd:integer" />
+      <xsd:element minOccurs="0" name="NetAmount" type="AncillaryPrice">
+        <xsd:annotation>
+          <xsd:documentation>Net Remit Payment amount, EX “250”</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="AncillaryPriceQuoteData" type="AncillaryPriceQuoteData" />
+      <xsd:choice>
+        <xsd:element minOccurs="0" name="Segment" type="SegmentOrTravelPortion" />
+        <xsd:element minOccurs="0" name="TravelPortions">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="TravelPortion" type="SegmentOrTravelPortion" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="BasicAncillaryServicesDataGroup">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CommercialName" type="CommonString" />
+      <xsd:element minOccurs="0" name="RficCode" type="CommonString" />
+      <xsd:element name="RficSubcode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="SSRCode" type="CommonString" />
+      <xsd:choice>
+        <xsd:element minOccurs="0" maxOccurs="1" name="ProductTextDetails">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="ProductTextDetailsItem">
+                <xsd:complexType>
+                  <xsd:attribute name="ItemName" type="CommonString" use="required" />
+                  <xsd:attribute name="ItemValue" type="CommonString" use="required" />
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="ProductText" type="CommonString" />
+      </xsd:choice>
+      <xsd:element name="OwningCarrierCode" type="CommonString" />
+      <xsd:element minOccurs="0" name="SsimCode" type="CommonString" />
+      <xsd:element minOccurs="0" name="BookingIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="Vendor" type="CommonString" />
+      <xsd:element minOccurs="0" name="EMDType" type="CommonString" />
+      <xsd:element minOccurs="0" name="EMDNumber" type="CommonString" />
+      <xsd:element minOccurs="0" name="EMDCoupon" type="CommonString" />
+      <xsd:element minOccurs="0" name="ETicketNumber" type="AncillaryServiceETicketNumberUpdate" />
+      <xsd:element minOccurs="0" name="ServiceFeeLineNumber" type="CommonString" />
+      <xsd:element minOccurs="0" name="DisplayOnlyIndicator" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="ConsumptionIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="PresentTo" type="CommonString" />
+      <xsd:element minOccurs="0" name="AtCity" type="CommonString" />
+      <xsd:element minOccurs="0" name="Endorsements" type="CommonString" />
+      <xsd:element minOccurs="0" name="StationIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="ServiceCity" type="CommonString" />
+      <xsd:element minOccurs="0" name="ServiceCityDestination" type="CommonString">
+        <xsd:annotation>
+          <xsd:documentation>Destination city or off point, Ex “BLR”</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ServiceType">
+        <xsd:annotation>
+          <xsd:documentation>Need to know the Service Type to e.g. 'A'llowance - indicate registered bag that
+                        is part of allowance; 'C'harges; 'F'light Related; 'P'repaid
+                    </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Z]" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="RuleSet">
+        <xsd:annotation>
+          <xsd:documentation>Needed to keep track of companion benefits for example. Will come from the Rules
+                        Processor
+                    </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleName" type="xsd:string" />
+            <xsd:element minOccurs="0" name="Deal">
+              <xsd:annotation>
+                <xsd:documentation>Information about applied discount/markup for this ancillary
+                                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:choice>
+                    <xsd:element minOccurs="0" name="Percentage" type="xsd:decimal">
+                      <xsd:annotation>
+                        <xsd:documentation>Percentage as defined in RULE for percentage
+                                                    discounts/markups
+                                                </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Amount">
+                      <xsd:annotation>
+                        <xsd:documentation>Amount as defined in RULE for monetary
+                                                    discounts/markups
+                                                </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:simpleContent>
+                          <xsd:extension base="xsd:decimal">
+                            <xsd:attribute name="currency" type="xsd:string" />
+                          </xsd:extension>
+                        </xsd:simpleContent>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:choice>
+                </xsd:sequence>
+                <xsd:attribute name="type" use="required">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:enumeration value="DISCOUNT" />
+                      <xsd:enumeration value="RISE" />
+                      <xsd:enumeration value="OVERRIDE" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:attribute>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+          <xsd:attribute name="RuleId" type="xsd:unsignedLong" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="OriginalPrice">
+        <xsd:annotation>
+          <xsd:documentation>Original Price from Pricing - will need to be persisted with the waiver code
+                    </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:decimal">
+              <xsd:attribute name="WaiverCode" type="StringLength1to10" use="required">
+                <xsd:annotation>
+                  <xsd:documentation>To override the price, waiver code is required
+                                    </xsd:documentation>
+                </xsd:annotation>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="NewMiscIndicator" type="xsd:byte" />
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="OptionalAncillaryServicesInformationDataGroup">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="1" name="Quantity" type="xsd:integer" />
+      <xsd:element minOccurs="0" maxOccurs="24" name="SegmentNumber" type="SegmentID.Pricing" />
+      <xsd:element minOccurs="0" name="EquivalentPrice" type="AncillaryPrice" />
+      <xsd:element minOccurs="0" name="TTLPrice" type="AncillaryPrice" />
+      <xsd:element minOccurs="0" name="PortionOfTravelIndicator" type="xsd:string" />
+      <xsd:element minOccurs="0" name="OriginalBasePrice" type="AncillaryPrice" />
+      <xsd:element minOccurs="0" name="RefundIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="CommisionIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="InterlineIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="FeeApplicationIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="PassengerTypeCode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="BoardPoint" type="xsd:string" />
+      <xsd:element minOccurs="0" name="OffPoint" type="xsd:string" />
+      <xsd:element minOccurs="0" name="TaxesIncluded" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="Taxes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="99" name="Tax" type="AncillaryTax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="SoftMatchIndicator" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="NoChargeNotAvailIndicator" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="4" name="TicketCouponNumberAssociation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="16" name="TicketCouponNumber" type="xsd:short" />
+            <xsd:element minOccurs="0" name="TicketReferenceNumber" type="CommonString" />
+            <xsd:element minOccurs="0" name="TicketNumber" type="CommonString" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="SimultaneousTicketIndicator" type="xsd:string" />
+      <xsd:element minOccurs="0" name="FormOfRefund" type="xsd:string" />
+      <xsd:element minOccurs="0" name="FeeNotGuaranteedIndicator" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="FQTVTierLevel" type="xsd:short" />
+      <xsd:element minOccurs="0" name="TourCodeSHC" type="CommonString" />
+      <xsd:element minOccurs="0" name="TravelDateEffective" type="CommonString" />
+      <xsd:element minOccurs="0" name="LatestTravelDatePermitted" type="CommonString" />
+      <xsd:element minOccurs="0" name="PurchaseByDate" type="xsd:date" />
+      <xsd:element minOccurs="0" name="TotalOriginalBasePrice" type="AncillaryPrice" />
+      <xsd:element minOccurs="0" name="TotalEquivalentPrice" type="AncillaryPrice" />
+      <xsd:element minOccurs="0" name="TotalTTLPrice" type="AncillaryPrice" />
+      <xsd:element minOccurs="0" name="TotalTaxes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="99" name="Tax" type="AncillaryTax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="TaxExemptIndicator" type="CommonString" />
+      <xsd:element minOccurs="0" name="BagWeight">
+        <xsd:complexType>
+          <xsd:annotation>
+            <xsd:documentation>Used to hold the weight of the Bag for baggage ancillary types</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:integer">
+              <xsd:attribute name="Unit" type="CommonString" use="optional" />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FareCalculationModeIndicator" type="FCMIType">
+        <xsd:annotation>
+          <xsd:documentation>0 = System priced, 1 = Manually priced, 2 - System priced, but tax data
+                        manipulated
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FareCalculationPriceIndicator" type="FCPIType">
+        <xsd:annotation>
+          <xsd:documentation>
+                        0 = System computer priced (without any manual modifications except for baggage allowance),
+                        1 = Manually priced,
+                        2-9 = For individual airline/system provider use,
+                        A-Z = Undefined industry use
+                    </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:attributeGroup name="AncillaryServicesAttributes">
+    <xsd:attribute name="id" type="UniqueIdentifier" />
+    <xsd:attribute name="op" type="OperationType">
+      <xsd:annotation>
+        <xsd:documentation>C = Create, U = Update, D = Delete</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="elementId" type="AssociationMatrixID" />
+  </xsd:attributeGroup>
+  <xsd:simpleType name="AssociationMatrixID">
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:simpleType name="OperationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="C" />
+      <xsd:enumeration value="U" />
+      <xsd:enumeration value="D" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SegmentID.Pricing">
+    <xsd:restriction base="xsd:byte">
+      <xsd:minInclusive value="1" />
+      <xsd:maxInclusive value="24" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PriceMismatchAction">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="REJECT" />
+      <xsd:enumeration value="ACCEPT_ANY_PRICE" />
+      <xsd:enumeration value="ACCEPT_LOWER_PRICE" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Indicator">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Y" />
+      <xsd:enumeration value="N" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="OptionalIndicator">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Y" />
+      <xsd:enumeration value="N" />
+      <xsd:enumeration value=" " />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="AirlineCode">
+    <xsd:annotation>
+      <xsd:documentation>Preferred format for airline codes. Structure is 2 upper case alpha-numeric characters
+                followed by an optional uppercase letter.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[A-Z0-9\*]{2}[A-Z]?" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="FlightNumber">
+    <xsd:annotation>
+      <xsd:documentation>Identifies a flight number (1 to 4 numbers followed by optional uppercase A - Z, which
+                specifies an operational suffix. Value may also be the enumerated or OPEN or ARNK. ARNK means Arrival
+                Unknown. An OPEN air segment indicates the cities in the flight and the class of service for ticketing
+                purposes but no flight number.
+                Leading zeros (0) are ignored. Note, Iberia uses leading 0 in flight numbers (ex: 0900 is different than
+                900).
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:union memberTypes="_flightNumberPattern _flightNumberLiterals" />
+  </xsd:simpleType>
+  <xsd:simpleType name="_flightNumberPattern">
+    <xsd:annotation>
+      <xsd:documentation>This private simple type defines the base flight number structure: 1 to 4 digits followed
+                by optional upper case letter. The upper case letter is a Operational Suffix used to distinguish two
+                flights with the same number on the same day.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{1,4}[A-Z]?" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_flightNumberLiterals">
+    <xsd:annotation>
+      <xsd:documentation>This private type enumerates flight number literals used for ground links and open
+                segments in an itinerary.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="OPEN" />
+      <xsd:enumeration value="ARNK" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CityCode">
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:simpleType name="UniqueIdentifier">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{1,10}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CommonString">
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:simpleType name="StringLength1to20">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1" />
+      <xsd:maxLength value="20" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="StringLength1to10">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1" />
+      <xsd:maxLength value="10" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Numeric0to99999">
+    <xsd:annotation>
+      <xsd:documentation>Used for Numeric values, from 1 to 9999 inclusive.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:integer">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="99999" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="FCMIType">
+    <xsd:restriction base="xsd:int">
+      <xsd:enumeration value="0" />
+      <xsd:enumeration value="1" />
+      <xsd:enumeration value="2" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="FCPIType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9A-Z]" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

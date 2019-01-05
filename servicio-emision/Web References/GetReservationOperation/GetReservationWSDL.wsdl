@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:tns="http://webservices.sabre.com/pnrbuilder/getres" xmlns:stl1="http://webservices.sabre.com/pnrbuilder/v1_18" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:or="http://services.sabre.com/res/or/v1_11" xmlns:ota="http://webservices.sabre.com/sabreXML/2003/07" xmlns:stl2="http://services.sabre.com/STL/v01" xmlns="http://schemas.xmlsoap.org/wsdl/" name="GetReservationWSDL" targetNamespace="http://webservices.sabre.com/pnrbuilder/getres" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import schemaLocation="msg-header-2_0.xsd" namespace="http://www.ebxml.org/namespaces/messageHeader" />
+      <xsd:import schemaLocation="wsse.xsd" namespace="http://schemas.xmlsoap.org/ws/2002/12/secext" />
+      <xsd:import schemaLocation="PNRBuilderTypes_v1.18.0.xsd" namespace="http://webservices.sabre.com/pnrbuilder/v1_18" />
+      <xsd:import schemaLocation="GetReservationSTLRQ_v1.18.0.xsd" namespace="http://webservices.sabre.com/pnrbuilder/v1_18" />
+      <xsd:import schemaLocation="GetReservationSTLRS_v1.18.0.xsd" namespace="http://webservices.sabre.com/pnrbuilder/v1_18" />
+      <xsd:import schemaLocation="OpenReservation.1.12.0.xsd" namespace="http://services.sabre.com/res/or/v1_12" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetReservationInput">
+    <wsdl:part name="header" element="eb:MessageHeader" />
+    <wsdl:part name="header2" element="wsse:Security" />
+    <wsdl:part name="body" element="stl1:GetReservationRQ" />
+  </wsdl:message>
+  <wsdl:message name="GetReservationOutput">
+    <wsdl:part name="header" element="eb:MessageHeader" />
+    <wsdl:part name="header2" element="wsse:Security" />
+    <wsdl:part name="body" element="stl1:GetReservationRS" />
+  </wsdl:message>
+  <wsdl:portType name="GetReservationPortType">
+    <wsdl:operation name="GetReservationOperation">
+      <wsdl:input message="tns:GetReservationInput" />
+      <wsdl:output message="tns:GetReservationOutput" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GetReservationSoapBinding" type="tns:GetReservationPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetReservationOperation">
+      <soap:operation soapAction="GetReservationOperation" />
+      <wsdl:input>
+        <soap:header message="tns:GetReservationInput" part="header" use="literal" />
+        <soap:header message="tns:GetReservationInput" part="header2" use="literal" />
+        <soap:body use="literal" parts="body" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:header message="tns:GetReservationOutput" part="header" use="literal" />
+        <soap:header message="tns:GetReservationOutput" part="header2" use="literal" />
+        <soap:body use="literal" parts="body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GetReservationService">
+    <wsdl:port name="GetReservationPortType" binding="tns:GetReservationSoapBinding">
+      <soap:address location="https://webservices.havail.sabre.com" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

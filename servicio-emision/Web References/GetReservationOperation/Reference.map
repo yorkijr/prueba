@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/envelope.xsd" filename="envelope.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/msg-header-2_0.xsd" filename="msg-header-2_0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/xlink.xsd" filename="xlink.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/xmldsig-core-schema.xsd" filename="xmldsig-core-schema.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/xml.xsd" filename="xml.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/GetReservation_1.18.0.wsdl" filename="GetReservationWSDL.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/GetReservationSTLRQ_v1.18.0.xsd" filename="GetReservationSTLRQ_v1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/wsse.xsd" filename="wsse.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/OpenReservation.1.12.0.xsd" filename="OpenReservation.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/GetReservationSTLRS_v1.18.0.xsd" filename="GetReservationSTLRS_v1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/PNRBuilderTypes_v1.18.0.xsd" filename="PNRBuilderTypes_v1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/Air.1.12.0.xsd" filename="Air.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/Pricing.1.12.0.xsd" filename="Pricing.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://files.developer.sabre.com/wsdl/sabreXML1.0.00/pnrservices/Ancillaries.1.12.0.xsd" filename="Ancillaries.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

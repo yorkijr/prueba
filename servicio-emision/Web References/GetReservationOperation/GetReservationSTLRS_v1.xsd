@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns="http://webservices.sabre.com/pnrbuilder/v1_18" xmlns:or="http://services.sabre.com/res/or/v1_12" xmlns:pnrb="http://webservices.sabre.com/pnrbuilder/v1_18" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://webservices.sabre.com/pnrbuilder/v1_18" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="PNRBuilderTypes_v1.18.0.xsd" />
+  <xsd:import schemaLocation="OpenReservation.1.12.0.xsd" namespace="http://services.sabre.com/res/or/v1_12" />
+  <xsd:element name="GetReservationRS">
+    <xsd:complexType>
+      <xsd:complexContent mixed="false">
+        <xsd:extension base="pnrb:GetReservationRSType" />
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="GetReservationRSType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Warnings" type="pnrb:Warnings.PNRB" />
+      <xsd:element minOccurs="0" name="Errors" type="pnrb:Errors.PNRB" />
+      <xsd:choice>
+        <xsd:element minOccurs="0" name="Reservation" type="pnrb:Reservation.PNRB" />
+        <xsd:element minOccurs="0" name="Content">
+          <xsd:complexType>
+            <xsd:choice>
+              <xsd:any processContents="lax" />
+            </xsd:choice>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element minOccurs="0" ref="or:PriceQuote" />
+      <xsd:element minOccurs="0" maxOccurs="1" name="VCR" type="pnrb:VCR" />
+    </xsd:sequence>
+    <xsd:attribute name="Version" type="xsd:string" use="optional" />
+  </xsd:complexType>
+  <xsd:element name="CssReservations">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" name="Reservations" type="pnrb:Reservation.PNRB" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CssScores">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Locator" type="xsd:string" />
+        <xsd:element name="Score" type="xsd:int" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CssReservationsResult">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" maxOccurs="unbounded" ref="pnrb:CssScores" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
